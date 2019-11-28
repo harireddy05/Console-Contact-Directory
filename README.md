@@ -15,7 +15,6 @@ To Run > python app.py
 Assumptions:
 - Running on the Windows OS (The platform wouldn't really matter but was developed on a Windows machine)
 - Application isn't intended to run with Python version below 3.x since the sqlite3 module is included in the standard library (since Python 2.5).
-- 
 
 Pros:
 - Prepared statement helps avoid injections.
