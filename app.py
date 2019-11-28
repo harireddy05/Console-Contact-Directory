@@ -6,7 +6,7 @@ try:
     # DB Connection
     connection = sqlite3.connect("CCDirectory.db")
     # Cursor Initiation
-    cursor = connection.cursor()
+    cursor = connection.cursor(prepared=True) # Better than > cursor = connection.cursor()
 except:
     print("Database Connection Failed.")
 
