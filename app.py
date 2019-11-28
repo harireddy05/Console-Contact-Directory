@@ -73,19 +73,32 @@ while(keep_active_flag):
                         print("Invalid Phone Number Format (Required: +dd ddd-ddd-dddd)")
                         continue                    
 
-                    # DB Insert Query
-                    # insert_record = "INSERT INTO CDirectory (ContactName, PhoneNumber) VALUES ('{contact_name}','{phone_number}');"
-                    
                     # DB Insert Operation Execution
                     try:
-                        # cursor.execute(insert_record)
-                        print("some")                        
+                        cursor.execute("INSERT INTO CDirectory VALUES (?, ?)", (contact_name, phone_number))                        
                     except:
                         print("No Database.")
                 
                 # Delete Record
                 elif(operation.lower() == 'del'):
-                    print("del")
+                    to_delete = input("Enter name or phone number to delete contact: ")
+                    if(re.match(name_pattern, to_delete) == None and re.match(phone_pattern,to_delete) == None):
+                        print("Invalid Input")
+                        continue
+                    elif(re.match(name_pattern, to_delete) != None):
+                        try:
+                            cursor.execute("DELETE FROM CDirectory WHERE ContactName=(?)", (to_delete,)) 
+                            print("Contact Deleted.")
+                        except:
+                            print("No Database.")
+                            continue
+                    elif(re.match(phone_pattern, to_delete) != None):
+                        try:
+                            cursor.execute("DELETE FROM CDirectory WHERE PhoneNumber=(?)", (to_delete,)) 
+                            print("Contact Deleted.")
+                        except:
+                            print("No Database.")
+                            continue
                 
                 # Display All Records
                 elif(operation.lower() == 'show'):
